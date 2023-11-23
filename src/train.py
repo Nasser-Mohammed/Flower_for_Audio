@@ -10,7 +10,7 @@ import torchvision.transforms as transforms
 from torchvision.datasets import CIFAR10
 from torch.utils.data import DataLoader
 
-from model import pyramidnet
+from src.model import pyramidnet
 import argparse
 from tensorboardX import SummaryWriter
 
