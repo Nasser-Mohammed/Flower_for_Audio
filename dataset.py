@@ -86,6 +86,7 @@ def _download_data() -> Tuple[Dataset, Dataset]:
     testset = CIFAR10("./dataset", train=False, download=True, transform=transform, target_transform = target_transforms)
     # print("Cifar")
     trainset.targets = torch.Tensor(trainset.targets)
+    testset.targets = torch.Tensor(testset.targets)
     print(type(trainset.targets))
     
     
