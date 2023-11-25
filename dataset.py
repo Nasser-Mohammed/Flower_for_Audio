@@ -8,6 +8,7 @@ import torch
 import torchvision.transforms as transforms
 from torch.utils.data import ConcatDataset, DataLoader, Dataset, Subset, random_split
 from torchvision.datasets import MNIST
+from torchvision.datasets import CIFAR10
 
 
 def load_datasets(  # pylint: disable=too-many-arguments
@@ -67,11 +68,17 @@ def _download_data() -> Tuple[Dataset, Dataset]:
     Tuple[MNIST, MNIST]
         The dataset for training and the dataset for testing MNIST.
     """
+    # transform = transforms.Compose(
+    #     [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
+    # )
+    # trainset = MNIST("./dataset", train=True, download=True, transform=transform)
+    # testset = MNIST("./dataset", train=False, download=True, transform=transform)
     transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
+    [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
     )
-    trainset = MNIST("./dataset", train=True, download=True, transform=transform)
-    testset = MNIST("./dataset", train=False, download=True, transform=transform)
+    trainset = CIFAR10(".", train=True, download=True, transform=transform)
+    testset = CIFAR10(".", train=False, download=True, transform=transform)
+    trainloader = DataLoader(trainset, batch_size=32, shuffle=True)
     return trainset, testset
 
 
