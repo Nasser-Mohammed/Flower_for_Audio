@@ -13,7 +13,8 @@ from flwr.common.typing import NDArrays, Scalar
 from flwr.server.history import History
 from torch.utils.data import DataLoader
 
-from flwr_baselines.publications.fedavg_mnist import model
+import model
+from src.model import pyramidnet
 
 
 def plot_metric_from_history(
@@ -120,7 +121,7 @@ def gen_evaluate_fn(
         # pylint: disable=unused-argument
         """Use the entire MNIST test set for evaluation."""
         # determine device
-        net = model.Net()
+        net = pyramidnet()
         params_dict = zip(net.state_dict().keys(), parameters_ndarrays)
         state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
         net.load_state_dict(state_dict, strict=True)

@@ -9,12 +9,12 @@ import numpy as np
 import torch
 from omegaconf import DictConfig
 
-from flwr_baselines.publications.fedavg_mnist import client, utils
+import client, utils
 
-DEVICE: torch.device = torch.device("gpu")
+DEVICE: torch.device = torch.device("cuda")
 
 
-# @hydra.main(config_path="docs/conf", config_name="config", version_base=None)
+@hydra.main(config_path="docs/conf", config_name="config", version_base=None)
 def main(cfg: DictConfig) -> None:
     """Main function to run CNN federated learning on MNIST.
 
