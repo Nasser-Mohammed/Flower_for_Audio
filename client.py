@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 
 # from flwr_baselines.publications.fedavg_mnist import model
 from dataset import load_datasets
-
+import model
 from src.model import pyramidnet
 
 
@@ -115,8 +115,8 @@ def gen_client_fn(
         """Create a Flower client representing a single organization."""
 
         # Load model
-        net = pyramidnet().to(device)
-        # net = model.Net().to(device)
+        # net = pyramidnet().to(device)
+        net = model.Net().to(device)
 
         # Note: each client gets a different trainloader/valloader, so each client
         # will train and evaluate on their own unique data

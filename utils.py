@@ -121,7 +121,8 @@ def gen_evaluate_fn(
         # pylint: disable=unused-argument
         """Use the entire MNIST test set for evaluation."""
         # determine device
-        net = pyramidnet()
+        # net = pyramidnet()
+        net = model.Net()
         params_dict = zip(net.state_dict().keys(), parameters_ndarrays)
         state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
         net.load_state_dict(state_dict, strict=True)
