@@ -11,7 +11,10 @@ from omegaconf import DictConfig
 
 import client, utils
 
-DEVICE: torch.device = torch.device("cpu")
+DEVICE: torch.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+client_resources = None
+if DEVICE.type == "cuda":
+    client_resources = {"num_cpus":4, "num_gpus": 0.2}
 
 
 @hydra.main(config_path="docs/conf", config_name="config", version_base=None)
@@ -51,6 +54,7 @@ def main(cfg: DictConfig) -> None:
         num_clients=cfg.num_clients,
         config=fl.server.ServerConfig(num_rounds=cfg.num_rounds),
         strategy=strategy,
+        client_resources=client_resources
     )
 
     file_suffix: str = (
