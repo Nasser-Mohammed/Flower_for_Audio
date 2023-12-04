@@ -14,6 +14,7 @@ from flwr.server.history import History
 from torch.utils.data import DataLoader
 
 import model
+from src.model import pyramidnet
 
 
 def plot_metric_from_history(
@@ -120,10 +121,17 @@ def gen_evaluate_fn(
         # pylint: disable=unused-argument
         """Use the entire MNIST test set for evaluation."""
         # determine device
-        net = model.Net()
+        # net = model.Net()
+        net = pyramidnet()
         params_dict = zip(net.state_dict().keys(), parameters_ndarrays)
-        state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
-        net.load_state_dict(state_dict, strict=True)
+        # state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
+        state_dict = OrderedDict(
+            {
+                k: torch.Tensor(v) if v.shape != torch.Size([]) else torch.Tensor([0])
+                for k, v in params_dict
+            }
+        )
+        net.load_state_dict(state_dict, strict=False)
         net.to(device)
 
         loss, accuracy = model.test(net, testloader, device=device)

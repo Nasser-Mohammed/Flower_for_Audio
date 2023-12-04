@@ -7,7 +7,7 @@ import numpy as np
 import torch
 import torchvision.transforms as transforms
 from torch.utils.data import ConcatDataset, DataLoader, Dataset, Subset, random_split
-from torchvision.datasets import MNIST
+from torchvision.datasets import MNIST,CIFAR10
 
 
 def load_datasets(  # pylint: disable=too-many-arguments
@@ -72,6 +72,8 @@ def _download_data() -> Tuple[Dataset, Dataset]:
     )
     trainset = MNIST("./dataset", train=True, download=True, transform=transform)
     testset = MNIST("./dataset", train=False, download=True, transform=transform)
+    # trainset = CIFAR10("./dataset", train=True, download=True, transform=transform)
+    # testset = CIFAR10("./dataset", train=False, download=True, transform=transform)
     return trainset, testset
 
 

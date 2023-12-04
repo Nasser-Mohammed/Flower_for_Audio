@@ -140,7 +140,7 @@ hydra:
     - path: ''
       schema: structured
       provider: schema
-    output_dir: /users/wang2451/Fed_with_flower/outputs/2023-11-25/21-12-50
+    output_dir: /users/wang2451/Fed_with_flower/outputs/2023-12-04/21-58-47
     choices:
       hydra/env: default
       hydra/callbacks: null
