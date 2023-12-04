@@ -10,10 +10,8 @@ import torch
 from flwr.common.typing import NDArrays, Scalar
 from torch.utils.data import DataLoader
 
-# from flwr_baselines.publications.fedavg_mnist import model
-from dataset import load_datasets
 import model
-from src.model import pyramidnet
+from dataset import load_datasets
 
 
 class FlowerClient(fl.client.NumPyClient):
@@ -115,7 +113,6 @@ def gen_client_fn(
         """Create a Flower client representing a single organization."""
 
         # Load model
-        # net = pyramidnet().to(device)
         net = model.Net().to(device)
 
         # Note: each client gets a different trainloader/valloader, so each client
