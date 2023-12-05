@@ -123,8 +123,10 @@ def gen_evaluate_fn(
         # determine device
         # net = model.Net()
         net = pyramidnet()
-        params_dict = zip(net.state_dict().keys(), parameters_ndarrays)
-        # state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
+        # params_dict = zip(net.state_dict().keys(), parameters_ndarrays) # original
+        # state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict}) # original
+        keys = [k for k in net.state_dict().keys() if 'bn' not in k]
+        params_dict = zip(keys, parameters_ndarrays)
         state_dict = OrderedDict(
             {
                 k: torch.Tensor(v) if v.shape != torch.Size([]) else torch.Tensor([0])
@@ -133,6 +135,12 @@ def gen_evaluate_fn(
         )
         net.load_state_dict(state_dict, strict=False)
         net.to(device)
+
+        # keys = [k for k in self.net.state_dict().keys() if 'bn' not in k]
+        # params_dict = zip(keys, parameters)
+        # state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+        # self.net.load_state_dict(state_dict, strict=False)
+
 
         loss, accuracy = model.test(net, testloader, device=device)
         # return statistics

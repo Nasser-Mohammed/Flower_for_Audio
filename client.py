@@ -36,13 +36,23 @@ class FlowerClient(fl.client.NumPyClient):
 
     def get_parameters(self, config: Dict[str, Scalar]) -> NDArrays:
         """Returns the parameters of the current net."""
-        return [val.cpu().numpy() for _, val in self.net.state_dict().items()]
+        # return [val.cpu().numpy() for _, val in self.net.state_dict().items()] # original 
+        return [val.cpu().numpy() for name, val in self.net.state_dict().items() if 'bn' not in name] # from tutorial
 
     def set_parameters(self, parameters: NDArrays) -> None:
         """Changes the parameters of the model using the given ones."""
-        params_dict = zip(self.net.state_dict().keys(), parameters)
-        state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
-        self.net.load_state_dict(state_dict, strict=True)
+        # Original:
+        # params_dict = zip(self.net.state_dict().keys(), parameters)
+        # state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
+        # self.net.load_state_dict(state_dict, strict=True)
+
+        # From tutorial:
+        keys = [k for k in self.net.state_dict().keys() if 'bn' not in k]
+        # print("HERE")
+        # print(keys)
+        params_dict = zip(keys, parameters)
+        state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+        self.net.load_state_dict(state_dict, strict=False)
 
     def fit(
         self, parameters: NDArrays, config: Dict[str, Scalar]
