@@ -140,6 +140,10 @@ def test(
         for images, labels in testloader:
             images, labels = images.to(device), labels.to(device)
             outputs = net(images)
+            labels = labels.to(torch.int64)
+            outputs = outputs.to(torch.int64)
+            print(outputs.dtype)
+            print(labels.dtype)
             loss += criterion(outputs, labels).item()
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)

@@ -67,13 +67,23 @@ def _download_data() -> Tuple[Dataset, Dataset]:
     Tuple[MNIST, MNIST]
         The dataset for training and the dataset for testing MNIST.
     """
-    transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
-    )
-    trainset = MNIST("./dataset", train=True, download=True, transform=transform)
-    testset = MNIST("./dataset", train=False, download=True, transform=transform)
-    # trainset = CIFAR10("./dataset", train=True, download=True, transform=transform)
-    # testset = CIFAR10("./dataset", train=False, download=True, transform=transform)
+    # transform = transforms.Compose(
+    #     [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
+    # ) // For MNIST
+
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    ])
+
+    # trainset = MNIST("./dataset", train=True, download=True, transform=transform)
+    # testset = MNIST("./dataset", train=False, download=True, transform=transform)
+    trainset = CIFAR10("./dataset", train=True, download=True, transform=transform)
+    
+    testset = CIFAR10("./dataset", train=False, download=True, transform=transform)
+    trainset.targets = torch.Tensor(trainset.targets)
+    testset.targets = torch.Tensor(testset.targets)
+    
     return trainset, testset
 
 
