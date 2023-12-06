@@ -54,6 +54,7 @@ def load_datasets(  # pylint: disable=too-many-arguments
         ds_train, ds_val = random_split(
             dataset, lengths, torch.Generator().manual_seed(seed)
         )
+        # print(ds_train)
         trainloaders.append(DataLoader(ds_train, batch_size=batch_size, shuffle=True))
         valloaders.append(DataLoader(ds_val, batch_size=batch_size))
     return trainloaders, valloaders, DataLoader(testset, batch_size=batch_size)
@@ -82,12 +83,13 @@ def _download_data() -> Tuple[Dataset, Dataset]:
     
     testset = CIFAR10("./dataset", train=False, download=True, transform=transform)
     trainset.targets = torch.Tensor(trainset.targets)
+    trainset.targets = trainset.targets.to(torch.int64)
     testset.targets = torch.Tensor(testset.targets)
-    
+    testset.targets = testset.targets.to(torch.int64)
     return trainset, testset
 
 
-def _partition_data(
+def _partition_data( # Change here to change hwo data is distributed
     num_clients: int = 10,
     iid: Optional[bool] = True,
     balance: Optional[bool] = True,

@@ -20,10 +20,10 @@ class Net(nn.Module):
 
     def __init__(self) -> None:
         super().__init__()
-        self.conv1 = nn.Conv2d(1, 32, 5, padding=1)
+        self.conv1 = nn.Conv2d(3, 32, 5, padding=1)
         self.conv2 = nn.Conv2d(32, 64, 5, padding=1)
         self.pool = nn.MaxPool2d(kernel_size=(2, 2), padding=1)
-        self.fc1 = nn.Linear(64 * 7 * 7, 512)
+        self.fc1 = nn.Linear(4096, 512)
         self.fc2 = nn.Linear(512, 10)
 
     def forward(self, input_tensor: torch.Tensor) -> torch.Tensor:
@@ -106,10 +106,12 @@ def _training_loop(
         The model that has been trained for one epoch.
     """
     for images, labels in trainloader:
+        # labels = labels.to(torch.int64)
         images, labels = images.to(device), labels.to(device)
-        labels = labels.to(torch.int64)
         optimizer.zero_grad()
-        loss = criterion(net(images), labels)
+        # loss = criterion(net(images), labels)
+        outputs = net(images)
+        loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
     return net
@@ -139,12 +141,11 @@ def test(
     net.eval()
     with torch.no_grad():
         for images, labels in testloader:
+            # labels = labels.to(torch.int64)
             images, labels = images.to(device), labels.to(device)
             outputs = net(images)
-            labels = labels.to(torch.int64)
-            # outputs = outputs.to(torch.int64)
-            # print(outputs.dtype)
-            # print(labels.dtype)
+            
+            
             loss += criterion(outputs, labels).item()
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)

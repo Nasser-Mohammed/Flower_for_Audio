@@ -1,0 +1,764 @@
+[2023-12-05 20:01:12,609][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=10, round_timeout=None)
+[2023-12-05 20:01:16,594][flwr][INFO] - Flower VCE: Ray initialized with resources: {'object_store_memory': 59538440601.0, 'memory': 128923028071.0, 'CPU': 40.0, 'accelerator_type:P100': 1.0, 'node:128.105.144.67': 1.0, 'GPU': 1.0}
+[2023-12-05 20:01:16,594][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.dev/docs/framework/how-to-run-simulations.html
+[2023-12-05 20:01:16,594][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 4, 'num_gpus': 0.2}
+[2023-12-05 20:01:16,621][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+[2023-12-05 20:01:16,622][flwr][INFO] - Initializing global parameters
+[2023-12-05 20:01:16,622][flwr][INFO] - Requesting initial parameters from one random client
+[2023-12-05 20:01:24,893][flwr][INFO] - Received initial parameters from one random client
+[2023-12-05 20:01:24,894][flwr][INFO] - Evaluating initial parameters
+[2023-12-05 20:01:38,303][flwr][INFO] - initial parameters (loss, other metrics): 117952440.5248, {'accuracy': 0.1002}
+[2023-12-05 20:01:38,304][flwr][INFO] - FL starting
+[2023-12-05 20:01:38,304][flwr][DEBUG] - fit_round 1: strategy sampled 10 clients (out of 10)
+[2023-12-05 20:02:14,509][flwr][ERROR] - Traceback (most recent call last):
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/worker.py", line 2380, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward
+    x = self.layer1(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward
+    out = self.conv2(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 11.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.40 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.12 GiB memory in use. Of the allocated memory 815.35 MiB is allocated by PyTorch, and 32.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 5 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward\n    x = self.layer1(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward\n    out = self.conv2(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 11.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.40 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.12 GiB memory in use. Of the allocated memory 815.35 MiB is allocated by PyTorch, and 32.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+
+[2023-12-05 20:02:14,510][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward
+    x = self.layer1(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward
+    out = self.conv2(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 11.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.40 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.12 GiB memory in use. Of the allocated memory 815.35 MiB is allocated by PyTorch, and 32.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 5 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward\n    x = self.layer1(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward\n    out = self.conv2(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 11.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.40 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.12 GiB memory in use. Of the allocated memory 815.35 MiB is allocated by PyTorch, and 32.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+[2023-12-05 20:02:27,616][flwr][ERROR] - Traceback (most recent call last):
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/worker.py", line 2380, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward
+    x = self.layer1(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 43, in forward
+    out = self.bn1(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward
+    return F.batch_norm(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm
+    return torch.batch_norm(
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 13.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.36 GiB memory in use. Of the allocated memory 902.86 MiB is allocated by PyTorch, and 193.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward\n    x = self.layer1(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 43, in forward\n    out = self.bn1(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward\n    return F.batch_norm(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm\n    return torch.batch_norm(\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 13.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.36 GiB memory in use. Of the allocated memory 902.86 MiB is allocated by PyTorch, and 193.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+
+[2023-12-05 20:02:27,617][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward
+    x = self.layer1(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 43, in forward
+    out = self.bn1(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward
+    return F.batch_norm(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm
+    return torch.batch_norm(
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 13.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.36 GiB memory in use. Of the allocated memory 902.86 MiB is allocated by PyTorch, and 193.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 104, in forward\n    x = self.layer1(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 43, in forward\n    out = self.bn1(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward\n    return F.batch_norm(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm\n    return torch.batch_norm(\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 13.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.40 GiB memory in use. Including non-PyTorch memory, this process has 1.36 GiB memory in use. Of the allocated memory 902.86 MiB is allocated by PyTorch, and 193.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+[2023-12-05 20:02:40,951][flwr][ERROR] - Traceback (most recent call last):
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/worker.py", line 2380, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward
+    x = self.layer2(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward
+    out = self.conv1(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 7.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.61 GiB memory in use. Of the allocated memory 1.17 GiB is allocated by PyTorch, and 158.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 4 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward\n    x = self.layer2(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward\n    out = self.conv1(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 7.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.61 GiB memory in use. Of the allocated memory 1.17 GiB is allocated by PyTorch, and 158.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+
+[2023-12-05 20:02:40,952][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward
+    x = self.layer2(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward
+    out = self.conv1(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 7.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.61 GiB memory in use. Of the allocated memory 1.17 GiB is allocated by PyTorch, and 158.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 4 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward\n    x = self.layer2(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward\n    out = self.conv1(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 7.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.16 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.61 GiB memory in use. Of the allocated memory 1.17 GiB is allocated by PyTorch, and 158.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+[2023-12-05 20:02:54,320][flwr][ERROR] - Traceback (most recent call last):
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/worker.py", line 2380, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward
+    x = self.layer2(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward
+    out = self.conv1(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 15.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.71 GiB memory in use. Of the allocated memory 1.26 GiB is allocated by PyTorch, and 163.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 8 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward\n    x = self.layer2(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward\n    out = self.conv1(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 15.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.71 GiB memory in use. Of the allocated memory 1.26 GiB is allocated by PyTorch, and 163.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+
+[2023-12-05 20:02:54,321][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward
+    x = self.layer2(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward
+    out = self.conv1(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 15.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.71 GiB memory in use. Of the allocated memory 1.26 GiB is allocated by PyTorch, and 163.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 8 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward\n    x = self.layer2(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 44, in forward\n    out = self.conv1(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 15.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.16 GiB memory in use. Including non-PyTorch memory, this process has 1.71 GiB memory in use. Of the allocated memory 1.26 GiB is allocated by PyTorch, and 163.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+[2023-12-05 20:03:07,939][flwr][ERROR] - Traceback (most recent call last):
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/worker.py", line 2380, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward
+    x = self.layer2(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 42, in forward
+    shortcut = self.down_sample(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 19, in forward
+    out = F.pad(x, (0, 0, 0, 0, 0, self.add_channels))
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.05 GiB memory in use. Including non-PyTorch memory, this process has 1.82 GiB memory in use. Of the allocated memory 1.35 GiB is allocated by PyTorch, and 190.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 9 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward\n    x = self.layer2(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 42, in forward\n    shortcut = self.down_sample(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 19, in forward\n    out = F.pad(x, (0, 0, 0, 0, 0, self.add_channels))\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.05 GiB memory in use. Including non-PyTorch memory, this process has 1.82 GiB memory in use. Of the allocated memory 1.35 GiB is allocated by PyTorch, and 190.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+
+[2023-12-05 20:03:07,940][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward
+    x = self.layer2(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 42, in forward
+    shortcut = self.down_sample(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 19, in forward
+    out = F.pad(x, (0, 0, 0, 0, 0, self.add_channels))
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.05 GiB memory in use. Including non-PyTorch memory, this process has 1.82 GiB memory in use. Of the allocated memory 1.35 GiB is allocated by PyTorch, and 190.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 9 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 105, in forward\n    x = self.layer2(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 42, in forward\n    shortcut = self.down_sample(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 19, in forward\n    out = F.pad(x, (0, 0, 0, 0, 0, self.add_channels))\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.05 GiB memory in use. Process 694901 has 2.05 GiB memory in use. Including non-PyTorch memory, this process has 1.82 GiB memory in use. Of the allocated memory 1.35 GiB is allocated by PyTorch, and 190.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+[2023-12-05 20:03:16,351][flwr][ERROR] - Traceback (most recent call last):
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/worker.py", line 2380, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward
+    x = self.layer3(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward
+    out = self.conv2(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Process 694901 has 1.95 GiB memory in use. Including non-PyTorch memory, this process has 1.96 GiB memory in use. Of the allocated memory 1.63 GiB is allocated by PyTorch, and 42.26 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 0 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward\n    x = self.layer3(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward\n    out = self.conv2(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Process 694901 has 1.95 GiB memory in use. Including non-PyTorch memory, this process has 1.96 GiB memory in use. Of the allocated memory 1.63 GiB is allocated by PyTorch, and 42.26 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+
+[2023-12-05 20:03:16,352][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward
+    x = self.layer3(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward
+    out = self.conv2(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Process 694901 has 1.95 GiB memory in use. Including non-PyTorch memory, this process has 1.96 GiB memory in use. Of the allocated memory 1.63 GiB is allocated by PyTorch, and 42.26 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694900, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f74cc0cb1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 0 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward\n    x = self.layer3(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 47, in forward\n    out = self.conv2(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 460, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Process 694901 has 1.95 GiB memory in use. Including non-PyTorch memory, this process has 1.96 GiB memory in use. Of the allocated memory 1.63 GiB is allocated by PyTorch, and 42.26 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+[2023-12-05 20:03:16,360][flwr][ERROR] - Traceback (most recent call last):
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 138, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 414, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 300, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/ray/_private/worker.py", line 2380, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=694901, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f4b3427f1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward
+    x = self.layer3(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 48, in forward
+    out = self.bn3(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward
+    return F.batch_norm(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm
+    return torch.batch_norm(
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Including non-PyTorch memory, this process has 1.95 GiB memory in use. Process 694900 has 1.96 GiB memory in use. Of the allocated memory 1.61 GiB is allocated by PyTorch, and 28.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694901, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f4b3427f1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 3 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward\n    x = self.layer3(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 48, in forward\n    out = self.bn3(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward\n    return F.batch_norm(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm\n    return torch.batch_norm(\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Including non-PyTorch memory, this process has 1.95 GiB memory in use. Process 694900 has 1.96 GiB memory in use. Of the allocated memory 1.61 GiB is allocated by PyTorch, and 28.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)
+
+[2023-12-05 20:03:16,372][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=694901, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f4b3427f1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit
+    return maybe_call_fit(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit
+    model.train(
+  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train
+    net = _training_loop(net, trainloader, device, criterion, optimizer)
+  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop
+    loss = criterion(net(images), labels)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward
+    x = self.layer3(x)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/Fed_with_flower/src/model.py", line 48, in forward
+    out = self.bn3(out)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward
+    return F.batch_norm(
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm
+    return torch.batch_norm(
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Including non-PyTorch memory, this process has 1.95 GiB memory in use. Process 694900 has 1.96 GiB memory in use. Of the allocated memory 1.61 GiB is allocated by PyTorch, and 28.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=694901, ip=128.105.144.67, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x7f4b3427f1f0>)
+  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 84, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 3 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run\n    job_results = job_fn(client)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 191, in fit\n    return maybe_call_fit(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/client.py", line 223, in maybe_call_fit\n    return client.fit(fit_ins)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/flwr/client/numpy_client.py", line 227, in _fit\n    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore\n  File "/users/wang2451/Fed_with_flower/client.py", line 60, in fit\n    model.train(\n  File "/users/wang2451/Fed_with_flower/model.py", line 78, in train\n    net = _training_loop(net, trainloader, device, criterion, optimizer)\n  File "/users/wang2451/Fed_with_flower/model.py", line 112, in _training_loop\n    loss = criterion(net(images), labels)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 106, in forward\n    x = self.layer3(x)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward\n    input = module(input)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/Fed_with_flower/src/model.py", line 48, in forward\n    out = self.bn3(out)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl\n    return forward_call(*args, **kwargs)\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 171, in forward\n    return F.batch_norm(\n  File "/users/wang2451/miniconda3/envs/flower/lib/python3.10/site-packages/torch/nn/functional.py", line 2478, in batch_norm\n    return torch.batch_norm(\ntorch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 11.91 GiB of which 3.38 MiB is free. Process 690925 has 1020.00 MiB memory in use. Process 694904 has 2.49 GiB memory in use. Process 694903 has 2.49 GiB memory in use. Process 694902 has 2.02 GiB memory in use. Including non-PyTorch memory, this process has 1.95 GiB memory in use. Process 694900 has 1.96 GiB memory in use. Of the allocated memory 1.61 GiB is allocated by PyTorch, and 28.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n',)

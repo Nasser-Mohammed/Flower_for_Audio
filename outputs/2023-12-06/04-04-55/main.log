@@ -1,0 +1,21 @@
+[2023-12-06 04:04:57,622][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=50, round_timeout=None)
+[2023-12-06 04:05:02,447][flwr][INFO] - Flower VCE: Ray initialized with resources: {'object_store_memory': 59533824000.0, 'GPU': 1.0, 'node:128.105.144.67': 1.0, 'accelerator_type:P100': 1.0, 'memory': 128912256000.0, 'CPU': 40.0}
+[2023-12-06 04:05:02,448][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.dev/docs/framework/how-to-run-simulations.html
+[2023-12-06 04:05:02,448][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 4, 'num_gpus': 0.2}
+[2023-12-06 04:05:02,486][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 5 actors
+[2023-12-06 04:05:02,486][flwr][INFO] - Initializing global parameters
+[2023-12-06 04:05:02,486][flwr][INFO] - Requesting initial parameters from one random client
+[2023-12-06 04:05:10,890][flwr][INFO] - Received initial parameters from one random client
+[2023-12-06 04:05:10,890][flwr][INFO] - Evaluating initial parameters
+[2023-12-06 04:05:25,561][flwr][INFO] - initial parameters (loss, other metrics): 318113907.3024, {'accuracy': 0.1}
+[2023-12-06 04:05:25,561][flwr][INFO] - FL starting
+[2023-12-06 04:05:25,562][flwr][DEBUG] - fit_round 1: strategy sampled 10 clients (out of 10)
+[2023-12-06 04:10:53,815][flwr][DEBUG] - fit_round 1 received 10 results and 0 failures
+[2023-12-06 04:10:54,400][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2023-12-06 04:11:02,584][flwr][INFO] - fit progress: (1, 1221002478.3872, {'accuracy': 0.1}, 337.02264336298686)
+[2023-12-06 04:11:02,584][flwr][INFO] - evaluate_round 1: no clients selected, cancel
+[2023-12-06 04:11:02,585][flwr][DEBUG] - fit_round 2: strategy sampled 10 clients (out of 10)
+[2023-12-06 04:16:27,453][flwr][DEBUG] - fit_round 2 received 10 results and 0 failures
+[2023-12-06 04:16:36,178][flwr][INFO] - fit progress: (2, 1661040496.64, {'accuracy': 0.1}, 670.6169467080617)
+[2023-12-06 04:16:36,179][flwr][INFO] - evaluate_round 2: no clients selected, cancel
+[2023-12-06 04:16:36,179][flwr][DEBUG] - fit_round 3: strategy sampled 10 clients (out of 10)

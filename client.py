@@ -48,8 +48,6 @@ class FlowerClient(fl.client.NumPyClient):
 
         # From tutorial:
         keys = [k for k in self.net.state_dict().keys() if 'bn' not in k]
-        # print("HERE")
-        # print(keys)
         params_dict = zip(keys, parameters)
         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
         self.net.load_state_dict(state_dict, strict=False)
